@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using SAP.API.DomainModels;
 using SAP.API.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
+
 namespace SAP.API.Controllers   
 {
     [ApiController]
@@ -19,11 +22,24 @@ namespace SAP.API.Controllers
 
         [HttpGet]
         [Route("[controller]")]
-        public async System.Threading.Tasks.Task<IActionResult> GetAllStudentsAsync()
+        public async Repositories.Task<IActionResult> GetAllStudentsAsync()
         {
             var students = await studentRepository.GetStudentsAsync();
             
             return Ok(mapper.Map<List<Student>>(students));
         }
+        [HttpGet]
+        [Route("[controller]/{studentId:guid}")]
+        public async Repositories.Task<IActionResult> GetStudentAsync([FromRoute] Guid studentId)
+        {
+            var student = await studentRepository.GetStudentAsync(studentId);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<Student>(student));
+        }
+
     }
 }

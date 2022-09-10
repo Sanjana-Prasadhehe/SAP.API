@@ -27,7 +27,16 @@ namespace SAP.API
             services.AddDbContext<StudentAdminContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("SAPDb")));
             services.AddScoped<IStudentRepository, SqlStudentRepository>();
-
+            services.AddCors((options) =>
+            {
+                options.AddPolicy("angularApplication", (builder) =>
+               {
+                   builder.WithOrigins("http://localhost:4200")
+                   .AllowAnyHeader()
+                   .WithMethods("GET", "POST", "PUT", "DELETE")
+                   .WithExposedHeaders("*");
+               });
+            });
 
 
             services.AddSwaggerGen(c =>
@@ -52,6 +61,8 @@ namespace SAP.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors("angularApplication");
 
             app.UseEndpoints(endpoints =>
             {
