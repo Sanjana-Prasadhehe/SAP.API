@@ -22,7 +22,7 @@ namespace SAP.API.Controllers
 
         [HttpGet]
         [Route("[controller]")]
-        public async Repositories.Task<IActionResult> GetAllStudentsAsync()
+        public async System.Threading.Tasks.Task<IActionResult> GetAllStudentsAsync()
         {
             var students = await studentRepository.GetStudentsAsync();
             
@@ -30,7 +30,7 @@ namespace SAP.API.Controllers
         }
         [HttpGet]
         [Route("[controller]/{studentId:guid}")]
-        public async Repositories.Task<IActionResult> GetStudentAsync([FromRoute] Guid studentId)
+        public async System.Threading.Tasks.Task<IActionResult> GetStudentAsync([FromRoute] Guid studentId)
         {
             var student = await studentRepository.GetStudentAsync(studentId);
             if (student == null)
