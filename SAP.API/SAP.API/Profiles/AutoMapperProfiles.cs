@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SAP.API.DomainModels;
-using DataModels= SAP.API.DataModels;
+using SAP.API.Profiles.AfterMaps;
+using DataModels = SAP.API.DataModels;
 
 namespace SAP.API.Profiles
 {
@@ -8,9 +9,20 @@ namespace SAP.API.Profiles
     {
         public AutoMapperProfiles()
         {
-            CreateMap<DataModels.Student, Student>().ReverseMap();
-            CreateMap<DataModels.Gender, Gender>().ReverseMap();
-            CreateMap<DataModels.Address,Address>().ReverseMap();
+            CreateMap<DataModels.Student, SAP.API.DomainModels.Student>()
+                .ReverseMap();
+
+            CreateMap<DataModels.Gender, SAP.API.DomainModels.Gender>()
+                .ReverseMap();
+
+            CreateMap<DataModels.Address, SAP.API.DomainModels.Address>()
+                .ReverseMap();
+
+            CreateMap<UpdateStudentRequest, DataModels.Student>()
+                .AfterMap<UpdateStudentRequestAfterMap>();
+
+            CreateMap<AddStudentRequest, DataModels.Student>()
+                .AfterMap<AddStudentRequestAfterMap>();
         }
     }
 }

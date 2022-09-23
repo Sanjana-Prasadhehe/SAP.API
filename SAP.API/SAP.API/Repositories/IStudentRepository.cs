@@ -6,10 +6,13 @@ namespace SAP.API.Repositories
 {
     public interface IStudentRepository
     {
-        System.Threading.Tasks.Task<List<Student>> GetStudentsAsync();
-        System.Threading.Tasks.Task <Student>GetStudentAsync(Guid studentId);
+        Task<List<Student>> GetStudentsAsync();
+        Task<Student> GetStudentAsync(Guid studentId);
+        Task<List<Gender>> GetGendersAsync();
+        Task<bool> Exists(Guid studentId);
+        Task<Student> UpdateStudent(Guid studentId, Student request);
+        Task<Student> DeleteStudent(Guid studentId);
+        Task<Student> AddStudent(Student request);
+        Task<bool> UpdateProfileImage(Guid studentId, string profileImageUrl);
     }
 }
-
-
-   
