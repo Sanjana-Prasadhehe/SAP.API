@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 namespace SAP.API.Repositories
 {
     public interface IImageRepository
     {
-        System.Threading.Tasks. Task<string> Upload(IFormFile file, string fileName);
+         Task<string> Upload(IFormFile file, string fileName);
     }
 }

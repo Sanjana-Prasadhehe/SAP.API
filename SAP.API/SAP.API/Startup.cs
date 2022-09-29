@@ -17,7 +17,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation.AspNetCore;
-using SAP.API.Repositories;
 
 namespace SAP.API
 {
@@ -28,7 +27,9 @@ namespace SAP.API
             Configuration = configuration;
         }
         public IConfiguration Configuration { get; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
+        [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors((options) =>
@@ -47,13 +48,13 @@ namespace SAP.API
             services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddDbContext<StudentAdminContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("StudentAdminPortalDb")));
+                options.UseSqlServer(Configuration.GetConnectionString("SAPDb")));
 
             services.AddScoped<IStudentRepository, SqlStudentRepository>();
             services.AddScoped<IImageRepository, LocalStorageImageRepository>();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "StudentAdminPortal.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SAP.API", Version = "v1" });
             });
             services.AddAutoMapper(typeof(Startup).Assembly);
         }

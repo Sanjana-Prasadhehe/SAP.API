@@ -2,6 +2,9 @@
 using SAP.API.DomainModels;
 using System.Linq;
 using SAP.API.Repositories;
+using System;
+using System.Collections.Generic;
+
 namespace SAP.API.Validators
 {
     public class AddStudentRequestValidator : AbstractValidator<AddStudentRequest>

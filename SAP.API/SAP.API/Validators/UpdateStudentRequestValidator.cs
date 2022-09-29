@@ -9,6 +9,7 @@ namespace SAP.API.Validators
     {
         public UpdateStudentRequestValidator(IStudentRepository studentRepository)
         {
+
             RuleFor(x => x.FirstName).NotEmpty();
             RuleFor(x => x.LastName).NotEmpty();
             RuleFor(x => x.DateOfBirth).NotEmpty();
@@ -16,7 +17,8 @@ namespace SAP.API.Validators
             RuleFor(x => x.Mobile).GreaterThan(99999).LessThan(10000000000);
             RuleFor(x => x.GenderId).NotEmpty().Must(id =>
             {
-                var gender = studentRepository.GetGendersAsync().Result.ToList()
+                var gender = studentRepository.GetGendersAsync().Result
+                .ToList()
                 .FirstOrDefault(x => x.GenderId == id);
 
                 if (gender != null)

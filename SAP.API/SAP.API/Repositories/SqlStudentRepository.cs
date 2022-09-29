@@ -1,7 +1,8 @@
-﻿using System;
+﻿using SAP.API.DataModels;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using SAP.API.DataModels;
 using SAP.API.Repositories;
 
 namespace SAP.API.Repositories
@@ -31,7 +32,7 @@ namespace SAP.API.Repositories
             return await context.Gender.ToListAsync();
         }
 
-        public async System.Threading.Tasks.Task<bool> Exists(Guid studentId)
+        public async System.Threading.Tasks. Task<bool> Exists(Guid studentId)
         {
             return await context.Student.AnyAsync(x => x.Id == studentId);
         }

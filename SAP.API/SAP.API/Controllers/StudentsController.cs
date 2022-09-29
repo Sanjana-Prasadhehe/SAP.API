@@ -51,7 +51,7 @@ namespace SAP.API.Controllers
 
         [HttpPut]
         [Route("[controller]/{studentId:guid}")]
-        public async System.Threading.Tasks. Task<IActionResult> UpdateStudentAsync([FromRoute] Guid studentId, [FromBody] UpdateStudentRequest request)
+        public async System.Threading.Tasks.Task<IActionResult> UpdateStudentAsync([FromRoute] Guid studentId, [FromBody] UpdateStudentRequest request)
         {
             if (await studentRepository.Exists(studentId))
             {
@@ -83,7 +83,7 @@ namespace SAP.API.Controllers
         [Route("[controller]/Add")]
         public async System.Threading.Tasks.Task<IActionResult> AddStudentAsync([FromBody] AddStudentRequest request)
         {
-            var student = await studentRepository.AddStudent(mapper.Map<SAP.API.DataModels.Student>(request));
+            var student = await studentRepository.AddStudent(mapper.Map<DataModels.Student>(request));
             return CreatedAtAction(nameof(GetStudentAsync), new { studentId = student.Id },
                 mapper.Map<Student>(student));
         }
